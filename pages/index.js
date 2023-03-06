@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState } from "react";
-import ClipboardJS from "clipboard";
 
 const Home = () => {
   const [formData, setFormData] = useState({
