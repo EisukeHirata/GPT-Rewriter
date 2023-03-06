@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -14,12 +14,13 @@ const Home = () => {
   });
   const [apiOutput, setApiOutput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
 
     console.log("Calling OpenAI...");
     console.log(
-      `${formData.userInputAudience}${formData.userInputFormality}${formData.userInputDomain}`
+      `${formData.userInputText}${formData.userInputFormality}${formData.userInputDomain}`
     );
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -34,7 +35,6 @@ const Home = () => {
         userInputLanguage: formData.userInputLanguage,
         userInputSimple: formData.userInputSimple,
         userInputCompelling: formData.userInputCompelling,
-
         userInputText: formData.userInputText,
       }),
     });
@@ -45,9 +45,6 @@ const Home = () => {
 
     setApiOutput(`${output}`);
     setIsGenerating(false);
-  };
-  const onUserChangedText = (event) => {
-    setUserInputText(event.target.value);
   };
 
   const onFormSubmit = (event) => {
@@ -72,14 +69,23 @@ const Home = () => {
       userInputCompelling,
       userInputText,
     };
-
+    console.log("TEXT " + newFormData.userInputText);
     setFormData(newFormData);
+    console.log("TEXT1 " + formData.userInputText);
 
-    callGenerateEndpoint();
+    // callGenerateEndpoint();
   };
   const handleCopy = () => {
     navigator.clipboard.writeText(apiOutput);
   };
+
+  useEffect(() => {
+    if (mounted) {
+      callGenerateEndpoint();
+    } else {
+      setMounted(true);
+    }
+  }, [formData]);
 
   return (
     <div className="root">

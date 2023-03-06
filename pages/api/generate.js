@@ -6,8 +6,10 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 const basePromptPrefix = `
-I will specify the sentences I want to rewrite and the style I want to use
-Rewrite the sentences entered by the user in the style specified by the user.The reply will only be the rewritten text, no explanation of it.
+
+Rewrite the following text  in the following style. 
+The reply will only be the rewritten text, no explanation of it.
+If you can't find the text to be rewritten, look  for it again and again
 `;
 
 const generateAction = async (req, res) => {
@@ -41,17 +43,21 @@ const generateAction = async (req, res) => {
         role: "user",
         content: `${basePromptPrefix}
 
-        Knowledge level of the intended audience of the rewritten sentence:${req.body.userInputAudience},
-        Formality of the rewritten sentence:${req.body.userInputFormality},
-        Who you are going to rewrite the sentence as:${req.body.userInputDomain},
-        Volume of the rewritten sentence:${req.body.userInputVolume},
-        Language of the rewritten sentence:${req.body.userInputLanguage},
-        Simplicity of the rewritten sentence:${req.body.userInputSimple},
-        Compelling power of the rewritten sentence:${req.body.userInputCompelling},
+        Passage: ${req.body.userInputText}
+
+
+        Writing style:
+        Knowledge level of the intended audience of the rewritten text:${req.body.userInputAudience},
+        Formality of the rewritten text:${req.body.userInputFormality},
+        Who you are going to rewrite the text as:${req.body.userInputDomain},
+        Volume of the rewritten text:${req.body.userInputVolume},
+        Language of the rewritten text:${req.body.userInputLanguage},
+        Simplicity of the rewritten text:${req.body.userInputSimple},
+        Compelling power of the rewritten text:${req.body.userInputCompelling},
       
 
-        Other conditions: ${req.body.userInputCondition},
-        The sentences entered by the user: ${req.body.userInputText}`,
+       
+        `,
       },
     ],
   });
