@@ -12,7 +12,6 @@ const Home = () => {
     userInputSimple: "",
     userInputCompelling: "",
     userInputText: "",
-    userInputCondition: "",
   });
   const [apiOutput, setApiOutput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -36,7 +35,7 @@ const Home = () => {
         userInputLanguage: formData.userInputLanguage,
         userInputSimple: formData.userInputSimple,
         userInputCompelling: formData.userInputCompelling,
-        userInputCondition: formData.userInputCondition,
+
         userInputText: formData.userInputText,
       }),
     });
@@ -62,7 +61,6 @@ const Home = () => {
     const userInputSimple = event.target.userInputSimple.value;
     const userInputCompelling = event.target.userInputCompelling.value;
     const userInputText = event.target.userInputText.value;
-    const userInputCondition = event.target.userInputCondition.value;
 
     const newFormData = {
       ...formData,
@@ -74,7 +72,6 @@ const Home = () => {
       userInputSimple,
       userInputCompelling,
       userInputText,
-      userInputCondition,
     };
 
     setFormData(newFormData);
@@ -118,187 +115,6 @@ const Home = () => {
                 ></path>
               </svg>
             </button>
-          </div>
-          <div className="Input-output">
-            <form onSubmit={onFormSubmit}>
-              <div>
-                <div className="option-box">
-                  <p>Audience:</p>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputAudience"
-                      value="General"
-                    />
-                    General
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputAudience"
-                      value="Knowledgeable"
-                    />
-                    Knowledgeable
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputAudience"
-                      value="Expert"
-                    />
-                    Expert
-                  </label>
-                </div>
-                <div className="option-box">
-                  <p>Formality:</p>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputFormality"
-                      value="Informal"
-                    />
-                    Informal
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputFormality"
-                      value="Natural"
-                    />
-                    Natural
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputFormality"
-                      value="Formal"
-                    />
-                    Formal
-                  </label>
-                </div>
-                <div className="option-box">
-                  <p>Role:</p>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputDomain"
-                      value="General"
-                    />
-                    General
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputDomain"
-                      value="Startup"
-                    />
-                    Startup
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputDomain"
-                      value="Investor"
-                    />
-                    Investor
-                  </label>
-                </div>
-
-                <div className="option-box">
-                  <p>Volume:</p>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputVolume"
-                      value="General"
-                    />
-                    General
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputVolume"
-                      value="Twitter"
-                    />
-                    Twitter
-                  </label>
-                  <label>
-                    <input type="radio" name="userInputVolume" value="Mail" />
-                    Mail
-                  </label>
-                </div>
-                <div className="option-box">
-                  <p>Language:</p>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputLanguage"
-                      value="English"
-                    />
-                    English
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="userInputLanguage"
-                      value="Japanese"
-                    />
-                    Japanese
-                  </label>
-                </div>
-                <div className="option-box">
-                  <p>Others:</p>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="userInputSimple"
-                      value="Simple"
-                    />
-                    Simple
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="userInputCompelling"
-                      value="Compelling"
-                    />
-                    Compelling
-                  </label>
-                </div>
-              </div>
-
-              <label>
-                Additional conditions
-                <textarea
-                  name="userInputCondition"
-                  className="prompt-box"
-                ></textarea>
-              </label>
-              <label>
-                Input Text:
-                <textarea
-                  name="userInputText"
-                  className="prompt-box"
-                ></textarea>
-              </label>
-
-              <button type="submit" className="generate-button ">
-                Submit
-              </button>
-            </form>
-
-            {apiOutput && (
-              <div className="output">
-                <div className="output-header-container">
-                  <div className="output-header">
-                    <h3>Output</h3>
-                  </div>
-                </div>
-                <div className="output-content">
-                  <p id="text-to-copy">{apiOutput}</p>
-                </div>
-              </div>
-            )}
           </div>
 
           <div className="header">
@@ -664,22 +480,40 @@ const Home = () => {
                 Your text
               </label>
               <textarea
-                id="message"
+                id="InputText"
                 rows="4"
+                name="userInputText"
                 class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Write your thoughts here..."
+                placeholder="Write your text here..."
               ></textarea>
             </div>
 
             <div className="my-4">
               <button
-                type="button"
+                type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Default
+                Rewrite
               </button>
             </div>
           </form>
+          {apiOutput && (
+            <div className="output">
+              <div className="output-header-container">
+                <div className="output-header">
+                  <h3>Output</h3>
+                </div>
+              </div>
+              <div className="output-content">
+                <textarea
+                  class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  id="text-to-copy"
+                  value={apiOutput}
+                  onChange={(event) => setApiOutput(event.target.value)}
+                ></textarea>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
