@@ -48,7 +48,7 @@ const generateAction = async (req, res) => {
         Language of the rewritten sentence:${req.body.userInputLanguage},
         Simplicity of the rewritten sentence:${req.body.userInputSimple},
         Compelling power of the rewritten sentence:${req.body.userInputCompelling},
-        Language of the rewritten sentence:${req.body.userInputLanguage},
+      
 
         Other conditions: ${req.body.userInputCondition},
         The sentences entered by the user: ${req.body.userInputText}`,
