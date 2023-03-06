@@ -78,6 +78,9 @@ const Home = () => {
 
     callGenerateEndpoint();
   };
+  const handleCopy = () => {
+    navigator.clipboard.writeText(apiOutput);
+  };
 
   return (
     <div className="root">
@@ -127,7 +130,22 @@ const Home = () => {
           </div>
 
           <form onSubmit={onFormSubmit}>
-            <div className="md:flex items-center my-4">
+            <div className="mt-8">
+              <label
+                for="message"
+                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+              >
+                Your text
+              </label>
+              <textarea
+                id="InputText"
+                rows="4"
+                name="userInputText"
+                class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write your text here..."
+              ></textarea>
+            </div>
+            <div className="md:flex items-center my-3">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Audience:
@@ -141,11 +159,12 @@ const Home = () => {
                       type="radio"
                       value="General"
                       name="userInputAudience"
+                      defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="horizontal-list-radio-audience-general"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       General{" "}
                     </label>
@@ -162,7 +181,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-audience-knowledgeable"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Knowledgeable
                     </label>
@@ -179,7 +198,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-audience-expert"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Expert
                     </label>
@@ -188,7 +207,7 @@ const Home = () => {
               </ul>
             </div>
 
-            <div className="md:flex items-center my-4">
+            <div className="md:flex items-center my-2">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Formality:
@@ -206,7 +225,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-formality-informal"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Informal{" "}
                     </label>
@@ -219,11 +238,12 @@ const Home = () => {
                       type="radio"
                       value="Natural"
                       name="userInputFormality"
+                      defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="horizontal-list-radio-formality-natural"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Natural
                     </label>
@@ -240,7 +260,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-formality-formal"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Formal
                     </label>
@@ -248,7 +268,7 @@ const Home = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:flex items-center my-4">
+            <div className="md:flex items-center my-3">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Role:
@@ -262,11 +282,12 @@ const Home = () => {
                       type="radio"
                       value="General"
                       name="userInputDomain"
+                      defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="horizontal-list-radio-domain-general"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       General{" "}
                     </label>
@@ -283,7 +304,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-domain-startup"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Startup
                     </label>
@@ -300,7 +321,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-domain-investor"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Investor
                     </label>
@@ -308,7 +329,7 @@ const Home = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:flex items-center my-4">
+            <div className="md:flex items-center my-2">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Volume:
@@ -322,11 +343,12 @@ const Home = () => {
                       type="radio"
                       value="General"
                       name="userInputVolume"
+                      defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="horizontal-list-radio-volume-general"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       General{" "}
                     </label>
@@ -343,7 +365,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-volume-twitter"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Twitter
                     </label>
@@ -360,7 +382,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-volume-mail"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Mail
                     </label>
@@ -368,7 +390,7 @@ const Home = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:flex items-center my-4">
+            <div className="md:flex items-center my-3">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Language:
@@ -382,11 +404,12 @@ const Home = () => {
                       type="radio"
                       value="English"
                       name="userInputLanguage"
+                      defaultChecked
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <label
                       for="horizontal-list-radio-license"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       English{" "}
                     </label>
@@ -403,7 +426,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-id"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Japanese
                     </label>
@@ -420,7 +443,7 @@ const Home = () => {
                     />
                     <label
                       for="horizontal-list-radio-millitary"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Spanish
                     </label>
@@ -428,7 +451,7 @@ const Home = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:flex items-center my-4">
+            <div className="md:flex items-center my-2">
               <div className="mr-4 w-48">
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
                   Others
@@ -446,7 +469,7 @@ const Home = () => {
                     />
                     <label
                       for="vue-checkbox-list"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Simple
                     </label>
@@ -463,7 +486,7 @@ const Home = () => {
                     />
                     <label
                       for="react-checkbox-list"
-                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      class="w-full py-2 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
                       Compelling
                     </label>
@@ -472,26 +495,13 @@ const Home = () => {
               </ul>
             </div>
 
-            <div className="mt-8">
-              <label
-                for="message"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Your text
-              </label>
-              <textarea
-                id="InputText"
-                rows="4"
-                name="userInputText"
-                class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Write your text here..."
-              ></textarea>
-            </div>
-
-            <div className="my-4">
+            <div
+              className="my-4 text-right
+          "
+            >
               <button
                 type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 Rewrite
               </button>
@@ -504,13 +514,23 @@ const Home = () => {
                   <h3>Output</h3>
                 </div>
               </div>
-              <div className="output-content">
+              <div className="my-4">
                 <textarea
                   class="h-[320px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   id="text-to-copy"
+                  rows="6"
                   value={apiOutput}
                   onChange={(event) => setApiOutput(event.target.value)}
                 ></textarea>
+                <div className="my-4 text-right">
+                  <button
+                    type="button"
+                    class="  text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    onClick={handleCopy}
+                  >
+                    Copy
+                  </button>
+                </div>
               </div>
             </div>
           )}
