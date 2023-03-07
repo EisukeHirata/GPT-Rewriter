@@ -1,5 +1,8 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 const Home = () => {
   const [formData, setFormData] = useState({
