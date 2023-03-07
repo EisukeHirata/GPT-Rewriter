@@ -126,7 +126,7 @@ const Home = () => {
             </button>
           </div>
 
-          <div className="header">
+          <div className="header mt-10">
             <div className="header-title">
               <h1 className="text-5xl">GPT Rewriter</h1>
             </div>
